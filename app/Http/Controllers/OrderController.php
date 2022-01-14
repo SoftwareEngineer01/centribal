@@ -12,9 +12,10 @@ class OrderController extends ResponseApiController
     
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::orderBy('date_order', 'desc')->get();
+        $data = OrderResource::collection($orders);
 
-        $message = $this->sendResponse($orders, 'Pedidos listados correctamente');
+        $message = $this->sendResponse($data, 'Pedidos listados correctamente');
 
         return $message;
     }
