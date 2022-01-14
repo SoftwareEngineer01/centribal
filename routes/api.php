@@ -18,4 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Artículos 
 Route::resource('article', 'ArticleController');
+
+// Pedidos
+Route::resource('order', 'OrderController');
