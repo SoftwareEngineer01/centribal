@@ -18,7 +18,6 @@ class CreateCustomersTable extends Migration
             $table->string('name');
             $table->string('mobile_phone');
             $table->string('email')->unique();
-            $table->string('direction');
             $table->string('address');
             $table->string('city');
             $table->string('country');
