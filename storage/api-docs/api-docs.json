@@ -1,0 +1,199 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/article": {
+            "get": {
+                "tags": [
+                    "artículos"
+                ],
+                "summary": "Mostrar articulos",
+                "operationId": "07db2b26f66d03844900e453afc8623b",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los artículos."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "artículos"
+                ],
+                "summary": "Agregar Artículo",
+                "description": "catalog_id, name",
+                "operationId": "id",
+                "requestBody": {
+                    "description": "Agrega Artículo",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "catalog_id",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "catalog_id": {
+                                        "type": "integer",
+                                        "format": "text",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Artículo 1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Error en los datos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Hubo un error al crear el articulo"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/article/{id}": {
+            "get": {
+                "tags": [
+                    "artículos"
+                ],
+                "summary": "Mostrar articulo por id",
+                "operationId": "eeb1c815391a2e3111d59f6dcf868b37",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del articulo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar detalle de los artículos."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "artículos"
+                ],
+                "summary": "Actualizar Artículo",
+                "description": "actualizar artículo",
+                "operationId": "1d0027e143be2d1232fc6a852163ce43",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del articulo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Actualiza Artículo",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "catalog_id",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "catalog_id": {
+                                        "type": "integer",
+                                        "format": "text",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Artículo Update"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Error en los datos"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "artículos"
+                ],
+                "summary": "Eliminar Artículo",
+                "description": "elimina articulo",
+                "operationId": "d510481b83e623c2b0f6023a98965629",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del articulo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Artículo eliminado correctamente"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
