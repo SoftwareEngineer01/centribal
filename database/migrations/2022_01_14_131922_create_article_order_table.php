@@ -17,7 +17,6 @@ class CreateArticleOrderTable extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained('orders');
             $table->foreignId('article_id')->constrained('articles');
-            $table->timestamps();
         });
     }
 
