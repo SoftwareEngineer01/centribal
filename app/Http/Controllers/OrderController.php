@@ -33,9 +33,6 @@ class OrderController extends ResponseApiController
             $order->customer_id = $request->get('customer_id');
             $order->save();
 
-            // Recupera el último id registrado de la notificación
-            $order_id = $order->id;   
-
             // Artículos del pedido
             $articles_id = [];
             
@@ -66,6 +63,60 @@ class OrderController extends ResponseApiController
             $message = $this->sendError('Pedido no encontrado', 'Hubo un error al buscar el pedido');
         }else {
             $message = $this->sendResponse($data, 'Pedido encontrado');
+        }
+
+        return $message;
+    }
+
+    
+    public function update(Request $request, $id) {
+        
+        $message = null;
+
+        try {
+
+            $order = Order::find($id);
+            $order->price = $request->get('price');
+            $order->date_order = $request->get('date_order');
+            $order->date_delivery = $request->get('date_delivery');
+            $order->customer_id = $request->get('customer_id');
+            $order->save();
+
+            // Artículos del pedido
+            $articles_id = [];
+            
+            foreach ($request->get('article_id') as $article_id) {
+                array_push($articles_id, [
+                    'article_id' => $article_id,
+                ]);                
+            }
+
+            // Relación entre pedido y artículos - Inserta datos en  article_order
+            $order->articles()->sync($articles_id);
+
+            $message = $this->sendResponse($order, 'Pedido actualizado correctamente');
+
+        }catch(\Throwable $th) {
+            $message = $this->sendError($th->getMessage(), 'Hubo un error al actualizar el pedido');
+        }
+
+        return $message;
+    }
+
+
+    public function destroy($id) {
+        
+        $message = null;
+
+        try {
+
+            $order = Order::find($id);
+            $order->delete();
+
+            $message = $this->sendResponse($order, 'Pedido eliminado correctamente');
+
+        }catch(\Throwable $th) {
+            $message = $this->sendError($th->getMessage(), 'Hubo un error al eliminar el pedido');
         }
 
         return $message;
