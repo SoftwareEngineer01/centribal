@@ -9,6 +9,22 @@ use App\Http\Resources\OrderResource;
 
 class OrderController extends ResponseApiController
 {
+
+    /**
+     * @OA\Get(
+     *     path="/api/order",
+     *     tags={"ordenes"},
+     *     summary="Mostrar ordenes",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Mostrar todas las ordenes."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     * )
+     */
     
     public function index()
     {
@@ -19,6 +35,36 @@ class OrderController extends ResponseApiController
 
         return $message;
     }
+
+    /**
+     * @OA\Post(
+     * path="/api/order",
+     * summary="Agregar orden",
+     * description="price, date_order, date_delivery, customer_id, article_id",
+     * operationId="id",
+     * tags={"ordenes"},
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Agrega orden",
+     *    @OA\JsonContent(
+     *       required={"price","date_order","date_delivery","customer_id","article_id"},
+     *       @OA\Property(property="price", type="string", format="text", example="50000"),
+     *       @OA\Property(property="date_order", type="string", format="text", example="2022-02-17 09:15:42"),
+     *       @OA\Property(property="date_delivery", type="string", format="text", example="2022-02-17 09:15:42"),
+     *       @OA\Property(property="customer_id", type="integer", format="text", example="1"),
+     *       @OA\Property(property="article_id", type="integer", format="array", example="[1,2,3]"),
+     *    ),
+     * ),
+     * @OA\Response(
+     *         response=200,
+     *         description="Agrega orden."
+     *     ),
+     * @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     * )
+     */
 
     public function store(Request $request) {
         
@@ -54,6 +100,33 @@ class OrderController extends ResponseApiController
         return $message;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/order/{id}",
+     *     tags={"ordenes"},
+     *     summary="Mostrar orden",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID del pedido",
+     *         required=true,
+     *         example=1,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Mostrar un pedido."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     * )
+     */
+
     public function show($id) {
 
         $order = Order::find($id);   
@@ -67,6 +140,46 @@ class OrderController extends ResponseApiController
 
         return $message;
     }
+
+    /**
+     * @OA\Put(
+     * path="/api/order/{id}",
+     * summary="Actualizar orden",
+     * description="price, date_order, date_delivery, customer_id, article_id",
+     * tags={"ordenes"},
+     * @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID del pedido",
+     *         required=true,
+     *         example=1,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Actualiza pedido",
+     *    @OA\JsonContent(
+     *       required={"price","date_order","date_delivery","customer_id","article_id"},
+     *       @OA\Property(property="price", type="string", format="text", example="6000"),
+     *       @OA\Property(property="date_order", type="string", format="text", example="2022-02-17 09:15:42"),
+     *       @OA\Property(property="date_delivery", type="string", format="text", example="2022-02-17 09:15:42"),
+     *       @OA\Property(property="customer_id", type="integer", format="text", example="1"),
+     *       @OA\Property(property="article_id", type="integer", format="array", example="[2,3]"),
+     *    ),
+     * ),
+     * @OA\Response(
+     *         response=200,
+     *         description="Pedido actualizado correctamente."
+     *     ),
+     * @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     * )
+     */
 
     
     public function update(Request $request, $id) {
@@ -102,6 +215,33 @@ class OrderController extends ResponseApiController
 
         return $message;
     }
+
+    /**
+     * @OA\Delete(
+     *     path="/api/order/{id}",
+     *     tags={"ordenes"},
+     *     summary="Eliminar orden",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID del pedido",
+     *         required=true,
+     *         example=8,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Pedido eliminado correctamente."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     * )
+     */
 
 
     public function destroy($id) {

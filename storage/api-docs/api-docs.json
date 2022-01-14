@@ -191,6 +191,216 @@
                     }
                 }
             }
+        },
+        "/api/order": {
+            "get": {
+                "tags": [
+                    "ordenes"
+                ],
+                "summary": "Mostrar ordenes",
+                "operationId": "2e0a787dfc4b1239185f92b95e14cbb9",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todas las ordenes."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ordenes"
+                ],
+                "summary": "Agregar orden",
+                "description": "price, date_order, date_delivery, customer_id, article_id",
+                "operationId": "id",
+                "requestBody": {
+                    "description": "Agrega orden",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "price",
+                                    "date_order",
+                                    "date_delivery",
+                                    "customer_id",
+                                    "article_id"
+                                ],
+                                "properties": {
+                                    "price": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "50000"
+                                    },
+                                    "date_order": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "2022-02-17 09:15:42"
+                                    },
+                                    "date_delivery": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "2022-02-17 09:15:42"
+                                    },
+                                    "customer_id": {
+                                        "type": "integer",
+                                        "format": "text",
+                                        "example": "1"
+                                    },
+                                    "article_id": {
+                                        "type": "integer",
+                                        "format": "array",
+                                        "example": "[1,2,3]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Agrega orden."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/order/{id}": {
+            "get": {
+                "tags": [
+                    "ordenes"
+                ],
+                "summary": "Mostrar orden",
+                "operationId": "1003deedfe383a0f9d1479021de16297",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del pedido",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar un pedido."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "ordenes"
+                ],
+                "summary": "Actualizar orden",
+                "description": "price, date_order, date_delivery, customer_id, article_id",
+                "operationId": "00b5b9a8dd3e21cc2a25d107070a2df1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del pedido",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "description": "Actualiza pedido",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "price",
+                                    "date_order",
+                                    "date_delivery",
+                                    "customer_id",
+                                    "article_id"
+                                ],
+                                "properties": {
+                                    "price": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "6000"
+                                    },
+                                    "date_order": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "2022-02-17 09:15:42"
+                                    },
+                                    "date_delivery": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "2022-02-17 09:15:42"
+                                    },
+                                    "customer_id": {
+                                        "type": "integer",
+                                        "format": "text",
+                                        "example": "1"
+                                    },
+                                    "article_id": {
+                                        "type": "integer",
+                                        "format": "array",
+                                        "example": "[2,3]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pedido actualizado correctamente."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ordenes"
+                ],
+                "summary": "Eliminar orden",
+                "operationId": "572a9fb123412d2972dce05a39aa634c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del pedido",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": 8
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pedido eliminado correctamente."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
         }
     },
     "security": [
