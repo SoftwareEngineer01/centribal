@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('price');
             $table->timestamp('date_order');
-            $table->timestamp('deliver_order');
+            $table->timestamp('date_delivery');
             $table->foreignId('customer_id')->constrained('customers');
         });
     }
