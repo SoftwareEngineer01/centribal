@@ -15,8 +15,8 @@ class CreateArticleOrderTable extends Migration
     {
         Schema::create('article_order', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders');
-            $table->foreignId('article_id')->constrained('articles');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->foreignId('article_id')->constrained('articles')->onDelete('cascade');
         });
     }
 
